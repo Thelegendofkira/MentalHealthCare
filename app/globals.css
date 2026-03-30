@@ -20,3 +20,269 @@ body {
   font-family: "Inter", system-ui, -apple-system, sans-serif;
   -webkit-font-smoothing: antialiased;
 }
+
+/* ================================================
+   GAME MODE — Kids Mode 🎮
+   ================================================ */
+
+@keyframes gameBgPulse {
+  0%   { background-position: 0% 50%; }
+  50%  { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
+}
+
+@keyframes floatEmoji {
+  0%   { transform: translateY(0) rotate(0deg) scale(1);          opacity: 1; }
+  80%  { opacity: 0.7; }
+  100% { transform: translateY(-110vh) rotate(540deg) scale(0.4); opacity: 0; }
+}
+
+@keyframes gameBounce {
+  0%, 100% { transform: translateY(0); }
+  50%       { transform: translateY(-7px); }
+}
+
+@keyframes rainbowText {
+  0%   { color: #f87171; }
+  25%  { color: #facc15; }
+  50%  { color: #4ade80; }
+  75%  { color: #60a5fa; }
+  100% { color: #f87171; }
+}
+
+@keyframes navGlow {
+  0%, 100% { box-shadow: 0 6px 30px rgba(167, 139, 250, 0.7); }
+  50%       { box-shadow: 0 6px 40px rgba(236, 72, 153, 0.8); }
+}
+
+/* Body: animated gradient */
+html[data-game-mode] body {
+  background: linear-gradient(
+    -45deg,
+    #7c3aed, #a855f7, #ec4899,
+    #f59e0b, #10b981, #3b82f6, #7c3aed
+  ) !important;
+  background-size: 400% 400% !important;
+  animation: gameBgPulse 10s ease infinite !important;
+}
+
+/* Navbar */
+html[data-game-mode] .game-header {
+  background: linear-gradient(
+    90deg,
+    #6366f1, #8b5cf6, #a855f7, #ec4899, #f43f5e, #f97316, #6366f1
+  ) !important;
+  background-size: 300% 100% !important;
+  border-bottom: 3px solid rgba(255, 255, 255, 0.45) !important;
+  animation: gameBgPulse 4s ease infinite, navGlow 3s ease infinite !important;
+}
+
+html[data-game-mode] .game-brand-text {
+  animation: rainbowText 2s linear infinite;
+  font-weight: 900 !important;
+  text-shadow: 0 2px 8px rgba(0, 0, 0, 0.25);
+}
+
+html[data-game-mode] .game-nav-link {
+  color: #fff !important;
+  background: rgba(255, 255, 255, 0.18) !important;
+  border: 2px solid rgba(255, 255, 255, 0.45) !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+  backdrop-filter: blur(4px);
+  transition: transform 0.2s, background 0.2s, box-shadow 0.2s !important;
+}
+
+html[data-game-mode] .game-nav-link:hover {
+  background: rgba(255, 255, 255, 0.35) !important;
+  transform: translateY(-3px) scale(1.07) !important;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25) !important;
+}
+
+/* Toggle button — normal state */
+.game-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  padding: 0.38rem 1rem;
+  border-radius: 9999px;
+  border: 2px solid #cbd5e1;
+  background: #f1f5f9;
+  color: #475569;
+  font-weight: 700;
+  font-size: 0.8rem;
+  cursor: pointer;
+  white-space: nowrap;
+  transition: all 0.2s ease;
+  line-height: 1;
+}
+.game-toggle-btn:hover {
+  background: #e2e8f0;
+  border-color: #94a3b8;
+  transform: scale(1.05);
+}
+
+/* Toggle button — game mode active */
+html[data-game-mode] .game-toggle-btn {
+  background: linear-gradient(135deg, #fbbf24, #f97316) !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+  color: #fff !important;
+  font-weight: 800 !important;
+  text-shadow: 0 1px 4px rgba(0, 0, 0, 0.3) !important;
+  box-shadow: 0 4px 18px rgba(251, 191, 36, 0.65) !important;
+  animation: gameBounce 1.4s ease-in-out infinite !important;
+}
+
+/* Mobile toggle */
+.game-toggle-btn-mobile {
+  padding: 0.38rem 0.55rem;
+  border-radius: 9999px;
+  border: 2px solid #e2e8f0;
+  background: #f8fafc;
+  font-size: 1.1rem;
+  cursor: pointer;
+  transition: all 0.2s;
+  line-height: 1;
+}
+.game-toggle-btn-mobile:hover { background: #e2e8f0; transform: scale(1.1); }
+
+html[data-game-mode] .game-toggle-btn-mobile {
+  background: linear-gradient(135deg, #fbbf24, #f97316) !important;
+  border-color: rgba(255, 255, 255, 0.7) !important;
+  animation: gameBounce 1.2s ease-in-out infinite !important;
+  box-shadow: 0 3px 12px rgba(251, 191, 36, 0.5) !important;
+}
+
+/* Cards & sections */
+html[data-game-mode] main .bg-white,
+html[data-game-mode] main .bg-stone-50 {
+  background: rgba(255, 255, 255, 0.12) !important;
+  backdrop-filter: blur(14px) !important;
+  -webkit-backdrop-filter: blur(14px) !important;
+  border-color: rgba(255, 255, 255, 0.25) !important;
+}
+
+html[data-game-mode] main .border-slate-200 {
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Headings */
+html[data-game-mode] main h1,
+html[data-game-mode] main h2,
+html[data-game-mode] main h3 {
+  color: #fff !important;
+  text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Body text */
+html[data-game-mode] main p,
+html[data-game-mode] main .text-slate-400,
+html[data-game-mode] main .text-slate-500,
+html[data-game-mode] main .text-slate-600,
+html[data-game-mode] main .text-slate-800,
+html[data-game-mode] main .text-slate-900 {
+  color: rgba(255, 255, 255, 0.88) !important;
+}
+
+/* Blue accents → golden */
+html[data-game-mode] main .text-blue-600,
+html[data-game-mode] main .text-blue-700 {
+  color: #fde68a !important;
+  text-shadow: 0 2px 8px rgba(253, 230, 138, 0.5);
+}
+
+html[data-game-mode] main .bg-blue-50 {
+  background: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* Hero CTA buttons */
+html[data-game-mode] main a.bg-blue-600 {
+  background: linear-gradient(135deg, #f97316, #ec4899) !important;
+  border-radius: 9999px !important;
+  font-weight: 800 !important;
+  box-shadow: 0 6px 22px rgba(249, 115, 22, 0.55) !important;
+  animation: gameBounce 2s ease-in-out infinite !important;
+}
+
+html[data-game-mode] main a.bg-white {
+  background: rgba(255, 255, 255, 0.2) !important;
+  border-color: rgba(255, 255, 255, 0.45) !important;
+  color: #fff !important;
+  border-radius: 9999px !important;
+  font-weight: 700 !important;
+}
+
+/* Stats */
+html[data-game-mode] main .text-4xl {
+  color: #ffd700 !important;
+  text-shadow: 0 2px 15px rgba(255, 215, 0, 0.6) !important;
+  animation: gameBounce 2.5s ease-in-out infinite !important;
+}
+
+/* Badge / label chip */
+html[data-game-mode] main span.bg-blue-50 {
+  background: rgba(255, 255, 255, 0.25) !important;
+  color: #fde68a !important;
+  border-color: rgba(255, 255, 255, 0.35) !important;
+}
+
+/* Footer */
+html[data-game-mode] footer {
+  background: rgba(255, 255, 255, 0.1) !important;
+  backdrop-filter: blur(10px) !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+html[data-game-mode] footer * {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+/* Training page — keep text dark so it's readable on light card backgrounds */
+html[data-game-mode] .training-page,
+html[data-game-mode] .training-page h1,
+html[data-game-mode] .training-page h2,
+html[data-game-mode] .training-page h3,
+html[data-game-mode] .training-page p,
+html[data-game-mode] .training-page span,
+html[data-game-mode] .training-page input,
+html[data-game-mode] .training-page div {
+  color: #1e293b !important;
+  text-shadow: none !important;
+}
+
+/* Keep user chat bubble white text (blue background) */
+html[data-game-mode] .training-page .bg-blue-600,
+html[data-game-mode] .training-page .bg-blue-600 * {
+  color: #ffffff !important;
+}
+
+/* Chat display box → black background in game mode */
+html[data-game-mode] .training-chat-box {
+  background: #000000 !important;
+  border-color: rgba(255, 255, 255, 0.2) !important;
+}
+
+/* AI reply bubbles on black → keep readable */
+html[data-game-mode] .training-chat-box .bg-stone-100 {
+  background: rgba(255, 255, 255, 0.15) !important;
+  color: #ffffff !important;
+}
+html[data-game-mode] .training-chat-box .bg-stone-100 * {
+  color: #ffffff !important;
+}
+
+/* "Mentor is thinking..." on black */
+html[data-game-mode] .training-chat-box .text-slate-400 {
+  color: rgba(255, 255, 255, 0.6) !important;
+}
+
+/* Input box → black background in game mode */
+html[data-game-mode] .training-input-field {
+  background: #000000 !important;
+  color: #ffffff !important;
+  border-color: rgba(255, 255, 255, 0.3) !important;
+}
+html[data-game-mode] .training-input-field::placeholder {
+  color: rgba(255, 255, 255, 0.45) !important;
+}
+
+

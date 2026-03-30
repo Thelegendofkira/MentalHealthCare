@@ -89,7 +89,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Audio Assessor Placeholder ── */}
+
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-10">
@@ -107,7 +107,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Core Issues Grid ── */}
+
       <section className="bg-white border-y border-slate-200 py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">
@@ -139,7 +139,7 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* ── Impact Metrics ── */}
+
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto">
           <div className="text-center mb-12">

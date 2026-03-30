@@ -1,7 +1,6 @@
 "use client";
 
 import { useState, useRef } from "react";
-// Assuming you are using lucide-react for icons as specified in your prompt
 import { Mic, Square, Loader2, AlertCircle, ArrowRight } from "lucide-react";
 
 export default function AudioAssessor() {
@@ -14,11 +13,9 @@ export default function AudioAssessor() {
 
     const startRecording = async () => {
         try {
-            // Reset state
             setResult(null);
             audioChunksRef.current = [];
 
-            // Request microphone access
             const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
             const mediaRecorder = new MediaRecorder(stream);
             mediaRecorderRef.current = mediaRecorder;
@@ -42,7 +39,6 @@ export default function AudioAssessor() {
         if (mediaRecorderRef.current && isRecording) {
             mediaRecorderRef.current.stop();
             setIsRecording(false);
-            // Stop all audio tracks to release the microphone
             mediaRecorderRef.current.stream.getTracks().forEach(track => track.stop());
         }
     };
@@ -50,13 +46,11 @@ export default function AudioAssessor() {
     const handleAudioStop = async () => {
         setIsProcessing(true);
 
-        // Create a blob from the recorded chunks
         const audioBlob = new Blob(audioChunksRef.current, { type: "audio/webm" });
         const formData = new FormData();
         formData.append("audio", audioBlob, "recording.webm");
 
         try {
-            // Send to your Next.js API route
             const response = await fetch("/api/analyze-audio", {
                 method: "POST",
                 body: formData,
@@ -65,7 +59,7 @@ export default function AudioAssessor() {
             if (!response.ok) throw new Error("Server error");
 
             const data = await response.json();
-            setResult(data); // Expecting { serious: true/false }
+            setResult(data);
 
         } catch (error) {
             console.error("Failed to analyze audio:", error);
@@ -79,7 +73,6 @@ export default function AudioAssessor() {
         <div className="flex flex-col items-center p-6 bg-stone-50 rounded-xl shadow-sm border border-stone-200 max-w-md mx-auto">
             <h3 className="text-xl font-medium text-slate-800 mb-6">How are you feeling today?</h3>
 
-            {/* Recording Controls */}
             <div className="flex gap-4 mb-8">
                 {!isRecording ? (
                     <button
@@ -101,7 +94,6 @@ export default function AudioAssessor() {
                 )}
             </div>
 
-            {/* Conditional UI based on Gemini's response */}
             {result && (
                 <div className="w-full animate-in fade-in slide-in-from-bottom-4 duration-500">
                     {result.serious ? (

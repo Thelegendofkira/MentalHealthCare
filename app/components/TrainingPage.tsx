@@ -45,7 +45,7 @@ export default function TrainingChat() {
     };
 
     return (
-        <div className="flex gap-6 p-6 max-w-6xl mx-auto">
+        <div className="flex gap-6 p-6 max-w-6xl mx-auto training-page">
             {/* Sidebar: Persistent State Display */}
             <div className="w-1/3 bg-stone-50 border border-stone-200 p-6 rounded-xl h-[600px]">
                 <h2 className="text-xl font-semibold text-slate-800 mb-4">Your Progress</h2>
@@ -75,7 +75,7 @@ export default function TrainingChat() {
             </div>
 
             {/* Main Chat Interface */}
-            <div className="w-2/3 flex flex-col bg-white border border-stone-200 rounded-xl h-[600px]">
+            <div className="w-2/3 flex flex-col bg-white border border-stone-200 rounded-xl h-[600px] training-chat-box">
                 <div className="flex-1 p-6 overflow-y-auto space-y-4">
                     {messages.map((msg, idx) => (
                         <div key={idx} className={`flex ${msg.role === "user" ? "justify-end" : "justify-start"}`}>
@@ -95,7 +95,7 @@ export default function TrainingChat() {
                         onChange={(e) => setInput(e.target.value)}
                         onKeyDown={(e) => e.key === "Enter" && sendMessage()}
                         placeholder="Type your update here..."
-                        className="flex-1 p-3 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
+                        className="flex-1 p-3 bg-stone-50 border border-stone-200 rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 training-input-field"
                     />
                     <button onClick={sendMessage} disabled={isLoading} className="bg-blue-600 text-white p-3 rounded-lg hover:bg-blue-700 transition-colors">
                         <Send size={20} />
