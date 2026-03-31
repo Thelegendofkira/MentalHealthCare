@@ -38,7 +38,9 @@ export async function POST(request: Request) {
                 responseMimeType: "application/json",
             }
         });
-
+        if (!response.text) {
+            throw new Error("Received empty response from Gemini");
+        }
         const parsedData = JSON.parse(response.text);
 
         return NextResponse.json(parsedData);
