@@ -1,12 +1,10 @@
 import { GoogleGenAI } from "@google/genai";
 import { NextResponse } from "next/server";
 
-// 1. Initialize the NEW SDK. It automatically finds process.env.GEMINI_API_KEY
 const ai = new GoogleGenAI({});
 
 export async function POST(request: Request) {
     try {
-        // 1. Extract the audio file from the incoming FormData
         const formData = await request.formData();
         const audioFile = formData.get("audio") as File;
 
@@ -14,11 +12,9 @@ export async function POST(request: Request) {
             return NextResponse.json({ error: "No audio file provided" }, { status: 400 });
         }
 
-        // 2. Convert the File into the Base64 format Gemini requires
         const arrayBuffer = await audioFile.arrayBuffer();
         const base64Audio = Buffer.from(arrayBuffer).toString("base64");
 
-        // 3. The strict prompt ensuring JSON output
         const prompt = `
       Listen to this audio recording from an adolescent. 
       Analyze the content: is there an immediate risk of self-harm, severe abuse, or a life-threatening crisis?
@@ -27,7 +23,6 @@ export async function POST(request: Request) {
       Example: {"serious": true} or {"serious": false}
     `;
 
-        // 4. Send the prompt and the audio data using the NEW SDK syntax
         const response = await ai.models.generateContent({
             model: "gemini-2.5-flash",
             contents: [
@@ -44,7 +39,6 @@ export async function POST(request: Request) {
             }
         });
 
-        // 5. Because we forced JSON MIME type, we can parse it directly safely
         const parsedData = JSON.parse(response.text);
 
         return NextResponse.json(parsedData);
